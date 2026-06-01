@@ -1,0 +1,19 @@
+[package]
+name = "lau-noncommutative-agents"
+version = "0.1.0"
+edition = "2021"
+description = "Connes' noncommutative geometry for agent systems — spectral triples, Dirac operators, K-theory, and the Lau ecosystem"
+license = "MIT"
+repository = "https://github.com/SuperInstance/lau-noncommutative-agents"
+readme = "README.md"
+keywords = ["noncommutative-geometry", "spectral-triple", "dirac-operator", "k-theory", "agents"]
+categories = ["mathematics", "science"]
+
+[dependencies]
+nalgebra = "0.33"
+num-complex = "0.4"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[dev-dependencies]
+approx = "0.5"
