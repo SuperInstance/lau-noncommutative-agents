@@ -13,10 +13,21 @@ impl DixmierTrace {
     pub fn nc_integral(triple: &SpectralTriple, a: &DMatrix<Complex<f64>>) -> Complex<f64> {
         let n = triple.hilbert.dimension;
         if n == 0 { return Complex::new(0.0, 0.0); }
-        let product = a * &triple.dirac.matrix;
-        let trace = product.trace();
+        // Compute Tr(a * |D|^{-1}) / log(n) as the Dixmier trace approximation
+        let ev = triple.dirac.eigenvalues_real();
+        let abs_d_inv: Vec<f64> = ev.iter().map(|&λ| {
+            if λ.abs() > 1e-10 { λ.abs().recip() } else { 0.0 }
+        }).collect();
+        let mut result = Complex::new(0.0, 0.0);
+        for i in 0..n {
+            for j in 0..n {
+                if i == j && i < abs_d_inv.len() {
+                    result += a[(i, j)] * abs_d_inv[i];
+                }
+            }
+        }
         let log_n = (n as f64).ln().max(1.0);
-        trace / Complex::new(log_n, 0.0)
+        result / Complex::new(log_n, 0.0)
     }
 
     /// Zeta function ζ_D(s) = Tr(|D|^{-s}).

@@ -28,8 +28,8 @@ impl ChernCharacter {
         let n = elements.len();
         if n == 0 { return Complex::new(0.0, 0.0); }
         let mut product = elements[0].clone();
-        for i in 1..n {
-            product = product * triple.dirac.commutator(&elements[i]);
+        for elem in elements.iter().take(n).skip(1) {
+            product *= triple.dirac.commutator(elem);
         }
         product.trace()
     }
@@ -37,7 +37,7 @@ impl ChernCharacter {
     /// Normalized Connes-Chern character (divided by n!).
     pub fn normalized_connes_chern(triple: &SpectralTriple, elements: &[DMatrix<Complex<f64>>]) -> Complex<f64> {
         let n = elements.len();
-        let factorial = (1..=n).fold(1usize, |acc, k| acc * k);
+        let factorial: usize = (1..=n).product();
         Self::connes_chern(triple, elements) / Complex::new(factorial as f64, 0.0)
     }
 

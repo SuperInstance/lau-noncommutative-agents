@@ -662,7 +662,8 @@ mod tests {
     #[test]
     fn test_lau_ecosystem_component_names() {
         use lau_noncommutative_agents::LauSpectralTriple;
-        let names = LauSpectralTriple::full_ecosystem().component_names();
+        let ecosystem = LauSpectralTriple::full_ecosystem();
+        let names = ecosystem.component_names();
         assert!(names.contains(&"lau-core"));
         assert!(names.contains(&"lau-noncommutative-agents"));
     }

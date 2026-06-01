@@ -35,7 +35,7 @@ impl TomitaTakesaki {
     }
 
     fn eigenvalues_of_modular(&self) -> Vec<f64> {
-        let n = self.dimension;
+        let _n = self.dimension;
         let real = self.to_real_symmetric();
         real.symmetric_eigenvalues().data.as_slice().to_vec()
     }

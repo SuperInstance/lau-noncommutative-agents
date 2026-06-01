@@ -10,7 +10,7 @@ impl IndexPairing {
     /// Pair a projection with the Dirac operator.
     pub fn pair_k0(triple: &SpectralTriple, p: &DMatrix<Complex<f64>>) -> i64 {
         let ev = triple.dirac.eigenvalues_real();
-        let n = triple.hilbert.dimension;
+        let _n = triple.hilbert.dimension;
         let mut sign_diag = Vec::new();
         for λ in &ev {
             if λ.abs() > 1e-10 {
@@ -56,10 +56,10 @@ impl IndexPairing {
         if n == 0 { return Complex::new(0.0, 0.0); }
         let mut product = triple.dirac.commutator(&elements[0]);
         for a in &elements[1..] {
-            product = product * triple.dirac.commutator(a);
+            product *= triple.dirac.commutator(a);
         }
         let trace = product.trace();
-        let factorial = (1..=n).fold(1usize, |acc, k| acc * k);
+        let factorial: usize = (1..=n).product();
         trace / Complex::new(factorial as f64, 0.0)
     }
 }

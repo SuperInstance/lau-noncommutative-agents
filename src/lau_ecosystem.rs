@@ -1,7 +1,7 @@
 //! The spectral triple of the ENTIRE Lau ecosystem.
 
-use nalgebra::{DMatrix, DVector, Complex};
-use crate::algebra::{CStarAlgebra, AlgebraState};
+use nalgebra::{DMatrix, Complex};
+use crate::algebra::CStarAlgebra;
 use crate::hilbert::HilbertSpace;
 use crate::dirac::DiracOperator;
 use crate::spectral_triple::SpectralTriple;

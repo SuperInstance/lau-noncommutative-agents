@@ -36,7 +36,7 @@ impl CyclicCohomology {
         let mut rotated: Vec<_> = (1..=n).map(|i| elements[i].clone()).collect();
         rotated.push(elements[0].clone());
         let val_rotated = phi(&rotated);
-        let sign = if n % 2 == 0 { 1.0 } else { -1.0 };
+        let sign = if n.is_multiple_of(2) { 1.0 } else { -1.0 };
         (val_forward - Complex::new(sign, 0.0) * val_rotated).norm() < tol
     }
 }
